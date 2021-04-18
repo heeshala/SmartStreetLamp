@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+
+    <script src="https://www.gstatic.com/firebasejs/5.3.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.3.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.3.0/firebase-database.js"></script>
+    <script>
+/**
+ * Firebase config block.
+ */
+ var firebaseConfig = {
+    apiKey: "AIzaSyCt-DUJJlFp49-VFAeQWBndCs2dytHftao",
+    authDomain: "smartlamp-cc1e4.firebaseapp.com",
+    databaseURL: "https://smartlamp-cc1e4-default-rtdb.firebaseio.com",
+    projectId: "smartlamp-cc1e4",
+    storageBucket: "smartlamp-cc1e4.appspot.com",
+    messagingSenderId: "1070499399680",
+    appId: "1:1070499399680:web:1dc2cb91d2fe8d5fbdb0e5",
+    measurementId: "G-0F73W935NJ"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+ 
+
+/**
+ * Data object to be written to Firebase.
+ */
+var data = {sender: null, timestamp: null, lat: null, lng: null};
+
+function makeInfoBox(controlDiv, map) {
+  // Set CSS for the control border.
+  var controlUI = document.createElement('div');
+  controlUI.style.boxShadow = 'rgba(0, 0, 0, 0.298039) 0px 1px 4px -1px';
+  controlUI.style.backgroundColor = '#fff';
+  controlUI.style.border = '2px solid #fff';
+  controlUI.style.borderRadius = '2px';
+  controlUI.style.marginBottom = '22px';
+  controlUI.style.marginTop = '10px';
+  controlUI.style.textAlign = 'center';
+  controlDiv.appendChild(controlUI);
+
+  // Set CSS for the control interior.
+  var controlText = document.createElement('div');
+  controlText.style.color = 'rgb(25,25,25)';
+  controlText.style.fontFamily = 'Roboto,Arial,sans-serif';
+  controlText.style.fontSize = '100%';
+  controlText.style.padding = '6px';
+  controlText.textContent =
+      'The map shows all clicks made in the last 10 minutes.';
+  controlUI.appendChild(controlText);
+}
+
+      /**
+      * Starting point for running the program. Authenticates the user.
+      * @param {function()} onAuthSuccess - Called when authentication succeeds.
+      */
+      function initAuthentication(onAuthSuccess) {
+        firebase.auth().signInAnonymously().catch(function(error) {
+          console.log(error.code + ', ' + error.message);
+        }, {remember: 'sessionOnly'});
+
+        firebase.auth().onAuthStateChanged(function(user) {
+          if (user) {
+            data.sender = user.uid;
+            onAuthSuccess();
+          } else {
+            // User is signed out.
+          }
+        });
+      }
+
+      var markers = [];
+      
+      var map;
+      /**
+       * Creates a map object with a click listener and a heatmap.
+       */
+      function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: 6.820971866182854 , lng: 80.03981492218105},
+          zoom: 18,
+          styles: [{
+            featureType: 'poi',
+            stylers: [{ visibility: 'off' }]  // Turn off POI.
+          },
+          {
+            featureType: 'transit.station',
+            stylers: [{ visibility: 'off' }]  // Turn off bus, train stations etc.
+          }],
+          disableDoubleClickZoom: true,
+          streetViewControl: false,
+        });
+
+    }
+     
+    function addMarkers(){
+    firebase.database().ref('lamps').on('value',function (snapshot){
+        clearOverlays();
+        snapshot.forEach(function (childSnapshot){
+        console.log(childSnapshot.key);
+        var uluru = { lat: childSnapshot.val().lat, lng: childSnapshot.val().lon };
+                var msg;
+                if(childSnapshot.val().LDR1==0){
+                    msg='Its Day Light'
+                    console.log("day");
+                }else{
+                    if(childSnapshot.val().Voltage==0){
+                        msg='CURRENT NOT PASSING'
+                    }else{
+                        if(childSnapshot.val().LDR2==1){
+                            msg='BULB IS BURNT'
+                        }
+                        else{
+                            msg='BULB IS ON'
+                        }
+                    }
+                }
+        var ico = { 
+                    url: 'src/street-lamp.png',
+                    scaledSize: new google.maps.Size(50, 50), // scaled size
+                    origin: new google.maps.Point(0,0), // origin
+                    anchor: new google.maps.Point(0, 0) 
+                   
+                };
+
+                var marker = new google.maps.Marker({
+                    position: uluru,
+                    title:childSnapshot.key,
+                    icon:ico,
+                    map: map
+                });
+
+                marker.info = new google.maps.InfoWindow({
+  content: '<b>'+msg+'</b> ' 
+});
+
+google.maps.event.addListener(marker, 'click', function() {
+  marker.info.open(map, marker);
+});
+
+
+
+               // markers[childSnapshot.key] = marker; 
+                markers.push(marker);
+    });
+  }
+     
+  );}
+  window.onload=addMarkers;
+  function clearOverlays() {
+  for (var i = 0; i < markers.length; i++ ) {
+    markers[i].setMap(null);
+  }
+  markers.length = 0;
+}
+    </script>
+    <script defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD6RHsRcNgY73aXu4Zfc0KA69oZoa23XDg&libraries=visualization&callback=initMap">
+    </script>
+  </body>
+</html>
