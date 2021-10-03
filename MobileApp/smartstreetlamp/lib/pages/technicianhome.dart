@@ -193,7 +193,7 @@ void requesttech(String id,String lamp)async{
 void accept(String id,String lamp)async{
   var _firebaseRef = FirebaseDatabase().reference().child('history').child(id);
      await _firebaseRef.update({"Status": "Accepted"});
-    await _firebaseRef.update({"AssignedTo": "342567091V"});
+    await _firebaseRef.update({"AssignedTo": "**KEY**"});
      var _firebaseRef2 = FirebaseDatabase().reference().child('issue').child(lamp);
      await _firebaseRef2.update({"Status": "Accepted"});
 
