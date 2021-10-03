@@ -1,8 +1,8 @@
 const functions = require('firebase-functions');
 const admin = require('firebase-admin');
 admin.initializeApp();
-const accountSid = "AC402d8b30616ded59a52e42523b040a1f";
-const authToken = "e04be1002e7c0122fc05f9ca676db8db";
+const accountSid = "ACCOUNDSID FROM TWILIO";
+const authToken = "ACCOUNDTOKEN FROM TWILIO";
 const client = require('twilio')(accountSid, authToken);
 var db = admin.database();
 var ref = db.ref("history");
@@ -17,7 +17,7 @@ exports.sendSMSNotfication = functions.database.ref('issue/{id}').onCreate(async
             client.messages
             .create({
                body: '\nAlert\nSmartLampPole '+val.Id+' is facing an issue\nReported as '+val.Description+'.',
-               from: '+14782172235',
+               from: '+Contact Number',
                to: data.Contact
              })
             .then(message => console.log(message.sid));
