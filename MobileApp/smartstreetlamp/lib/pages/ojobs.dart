@@ -52,15 +52,7 @@ Widget formWidget(){
                         
                         itemCount: item.length,
                         itemBuilder: (context, index) {
-                          /*temp=item[index]['Temperature'];
-                          if(temp>27){
-                              stat="too hot";
-
-                            }
-                            else{
-                              stat="too cold";
-
-                            }*/
+                         
                             var latitude;
                             var longitude;
                             String id=item[index]['Lamp'];
