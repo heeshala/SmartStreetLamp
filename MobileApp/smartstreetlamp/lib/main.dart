@@ -41,7 +41,7 @@ class MyApp extends StatelessWidget {
           nextScreen: OLogin(),
           splashTransition: SplashTransition.fadeTransition,
           
-          backgroundColor: Colors.blue[200],
+          backgroundColor: Colors.blue[800],
         )
     );
   }
