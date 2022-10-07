@@ -45,7 +45,7 @@ class _HomeState extends State<Login> {
                              padding: EdgeInsets.only(top :50, left: 20,right: 20 ),
                             child: RaisedButton(
                               
-                        textColor: Colors.white,
+                        textColor: Colors.green,
                         color: Colors.blue,
                         child: Text('Owner' , style: TextStyle(fontSize: 30,color: Colors.white,fontWeight:FontWeight.bold),),
                        onPressed: () {
@@ -58,7 +58,7 @@ class _HomeState extends State<Login> {
                              padding: EdgeInsets.only(top :50, left: 20,right: 20 ),
                             child: RaisedButton(
                               
-                        textColor: Colors.white,
+                        textColor: Colors.green,
                         color: Colors.blue,
                         child: Text('Technician' , style: TextStyle(fontSize: 30,color: Colors.white,fontWeight:FontWeight.bold),),
                        onPressed: () {
