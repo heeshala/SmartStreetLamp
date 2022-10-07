@@ -43,34 +43,34 @@ PageController _pageController = PageController();
           BottomNavigationBarItem(
             icon: Icon(
               Icons.build,
-              color: _selectedIndex == 0 ? Colors.cyan : Colors.grey,
+              color: _selectedIndex == 0 ? Colors.cyan : Colors.blue[800],
             ),
             title: Text(
               'Issues',
               style: TextStyle(
-                  color: _selectedIndex == 0 ? Colors.cyan : Colors.grey),
+                  color: _selectedIndex == 0 ? Colors.cyan : Colors.blue[800]),
             ),
           ),
           BottomNavigationBarItem(
             icon: Icon(
               Icons.person_rounded,
-              color: _selectedIndex == 1 ? Colors.cyan : Colors.grey,
+              color: _selectedIndex == 1 ? Colors.cyan : Colors.blue[800]),
             ),
             title: Text(
               'Profile',
               style: TextStyle(
-                  color: _selectedIndex == 1 ? Colors.cyan : Colors.grey),
+                  color: _selectedIndex == 1 ? Colors.cyan : Colors.blue[800]),
             ),
           ),
           BottomNavigationBarItem(
             icon: Icon(
               Icons.work,
-              color: _selectedIndex == 2 ? Colors.cyan : Colors.grey,
+              color: _selectedIndex == 2 ? Colors.cyan : Colors.blue[800]),
             ),
             title: Text(
               'My Jobs',
               style: TextStyle(
-                  color: _selectedIndex == 2 ? Colors.cyan : Colors.grey),
+                  color: _selectedIndex == 2 ? Colors.cyan : Colors.blue[800]),
             ),
           ),
         ],
