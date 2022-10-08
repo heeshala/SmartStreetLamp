@@ -43,18 +43,18 @@ PageController _pageController = PageController();
           BottomNavigationBarItem(
             icon: Icon(
               Icons.build,
-              color: _selectedIndex == 0 ? Colors.cyan : Colors.grey,
+              color: _selectedIndex == 0 ? Colors.cyan : Colors.red,
             ),
             title: Text(
               'Issues',
               style: TextStyle(
-                  color: _selectedIndex == 0 ? Colors.cyan : Colors.grey),
+                  color: _selectedIndex == 0 ? Colors.cyan : Colors.red),
             ),
           ),
           BottomNavigationBarItem(
             icon: Icon(
               Icons.person_rounded,
-              color: _selectedIndex == 1 ? Colors.cyan : Colors.grey,
+              color: _selectedIndex == 1 ? Colors.cyan : Colors.red,
             ),
             title: Text(
               'Profile',
