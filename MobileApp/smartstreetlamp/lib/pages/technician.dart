@@ -59,7 +59,7 @@ PageController _pageController = PageController();
             title: Text(
               'Profile',
               style: TextStyle(
-                  color: _selectedIndex == 1 ? Colors.cyan : Colors.grey),
+                  color: _selectedIndex == 1 ? Colors.cyan : Colors.blue),
             ),
           ),
           BottomNavigationBarItem(
