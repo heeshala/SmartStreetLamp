@@ -65,7 +65,7 @@ PageController _pageController = PageController();
           BottomNavigationBarItem(
             icon: Icon(
               Icons.work,
-              color: _selectedIndex == 2 ? Colors.cyan : Colors.grey,
+              color: _selectedIndex == 2 ? Colors.cyan : Colors.blue,
             ),
             title: Text(
               'On Progress',
