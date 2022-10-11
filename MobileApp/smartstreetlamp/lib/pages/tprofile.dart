@@ -107,7 +107,7 @@ Widget formWidget() {
                           ),
                           child: Icon(
                             Icons.edit,
-                            color: Colors.white,
+                            color: Colors.blue,
                           ),
                         ),
                       ),
